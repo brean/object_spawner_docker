@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  object_spawner:
+    tty: True
+    container_name: object_spawner
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        ROS_DISTRO: noetic
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - ./object_spawner:/root/ws/src/object_spawner
+    privileged: True
+    environment:
+      - DISPLAY # for gazebo gui
+      - NVIDIA_VISIBLE_DEVICES=all # for docker-nvidia2
+      - NVIDIA_DRIVER_CAPABILITIES=all # for docker-nvidia2
+    expose:
+      - 11311
+      - 12345
+    command: [
+      'roslaunch',
+      'object_spawner',
+      'demo.launch']
