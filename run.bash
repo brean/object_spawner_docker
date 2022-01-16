@@ -1,4 +1,4 @@
 #!/bin/bash
 xhost +local:root
-docker-compose up
+docker-compose run object_spawner
 xhost -local:root

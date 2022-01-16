@@ -6,6 +6,7 @@ WORKDIR /root/ws
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 
+# install gazebo and required python packages
 RUN apt-get update && apt-get install -y \
   ros-${ROS_DISTRO}-rviz \
   ros-${ROS_DISTRO}-gazebo-ros \
@@ -13,7 +14,7 @@ RUN apt-get update && apt-get install -y \
   if test $ROS_DISTRO = 'noetic'; then \
       apt-get install python3-catkin-tools python3-rospkg -y; \
   else \
-      apt-get install python-catkin-tools python-rospkg; \
+      apt-get install python-catkin-tools python-rospkg -y; \
   fi && \
   rm -rf /var/lib/apt/lists/*
 
